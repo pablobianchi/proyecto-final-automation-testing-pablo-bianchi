@@ -17,7 +17,7 @@ out.mkdir(parents=True, exist_ok=True)
 
 
 #base url del proyecto a testear, de aca se deberían desprender todas las demas URL
-URL = 'https://www.saucedemo.com/'
+URL = 'https://www.saucedemo.com'
 USERNAME = 'standard_user'
 PASSWORD = 'secret_sauce'
 BTNLOGIN = 'login-button'
