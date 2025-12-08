@@ -7,7 +7,7 @@ from utils.helper import USERNAME,PASSWORD, take_screenshot
 import random
 import time
 
-
+@pytest.mark.ui
 def test_cart( driver ):
 
 

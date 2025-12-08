@@ -4,7 +4,7 @@ from pages.inventory_page import InventoryPage
 
 from utils.helper import USERNAME,PASSWORD, take_screenshot
 
-
+@pytest.mark.ui
 def test_inventory( driver ):
 
 

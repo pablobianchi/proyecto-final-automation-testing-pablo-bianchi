@@ -19,6 +19,7 @@ CASOS_LOGIN = leer_csv_login('data/data_login.csv')
  # Resultado: [('standard_user', 'secret_sauce', True), ...]
 
 @pytest.mark.parametrize("username,password,login_bool",CASOS_LOGIN)
+@pytest.mark.ui
 def test_login( driver, username , password , login_bool  ):
 
     loginPage = LoginPage( driver )

@@ -21,10 +21,16 @@ Instalación de dependencias
     
 ## Ejecución
 
-Para ejecutar las pruebas
+Para ejecutar las pruebas ( todas las pruebas )
 
 ```bash
   pytest -v
+```
+
+Para ejecutar las pruebas solo de un modulo en especial
+
+```bash
+  pytest -v -m {api|ui}
 ```
 
 Si se requiere tener un output en formato HTML
