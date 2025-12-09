@@ -14,6 +14,8 @@ def test_cart( driver ):
     loginPage = LoginPage( driver )
     loginPage.login_completo(USERNAME,PASSWORD)
 
+    driver.log_get(driver.current_url)
+
     inventoryPage = InventoryPage( driver )
     take_screenshot(driver , 'inventario' )
 

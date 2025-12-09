@@ -1,15 +1,67 @@
 import pytest
 import pytest_html
+import logging
+import time
 
 from utils.helper import get_driver,out
 from py.xml import html
 
 import base64
 
+logger = logging.getLogger(__name__)
+
+
+# class LoggingWebDriver:
+#     def __init__(self, driver, logger=None):
+#         # usamos object.__setattr__ para no disparar __setattr__ custom
+#         object.__setattr__(self, "_driver", driver)
+#         object.__setattr__(self, "_logger", logger or logging.getLogger(__name__))
+
+#     def get(self, url: str):
+#         start = time.perf_counter()
+#         self._driver.get(url)
+#         duration = time.perf_counter() - start
+
+#         # Logeamos en formato similar al de la API
+#         self._logger.info(
+#             "UI GET %s -> title='%s' (%.3f s)",
+#             url,
+#             self._driver.title,
+#             duration,
+#         )
+
+#     # Delegamos TODO lo demás al driver real
+#     def __getattr__(self, name):
+#         # si no es 'get', buscamos el atributo en el driver real
+#         return getattr(self._driver, name)
+
+#     def __setattr__(self, name, value):
+#         if name in {"_driver", "_logger"}:
+#             object.__setattr__(self, name, value)
+#         else:
+#             setattr(self._driver, name, value)
 
 @pytest.fixture
 def driver():
     driver = get_driver();
+
+    def log_get(url: str):
+        start = time.perf_counter()
+        driver.get(url)
+        duration = time.perf_counter() - start
+
+        # Formato similar al de la API:
+        # GET URL -> title='...' (X.XXX s)
+        logger.info(
+            "%s %s -> title='%s' (%.3f s)",
+            "GET",
+            url,
+            driver.title,
+            duration,
+        )
+
+    # colgamos el helper en el propio driver
+    driver.log_get = log_get
     
     ##Idea clave
     ##return → devuelve y finaliza la función.
