@@ -10,10 +10,14 @@ from pathlib import Path
 
 
 REPORTS_FOLDER = 'reports'
+LOGS_FOLDER = 'logs'
+
 TEST_VERSION = f"ejecucion_{datetime.now():%Y%m%d_%H%M%S}"
 
 out = Path.cwd() / REPORTS_FOLDER / TEST_VERSION
 out.mkdir(parents=True, exist_ok=True)
+
+logs_path = Path.cwd() / LOGS_FOLDER / TEST_VERSION 
 
 
 #base url del proyecto a testear, de aca se deberían desprender todas las demas URL
