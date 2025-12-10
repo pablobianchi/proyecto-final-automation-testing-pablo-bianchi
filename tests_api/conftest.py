@@ -3,6 +3,10 @@ import requests
 import time
 import logging
 from utils.helper import logs_path
+from faker import Faker
+
+
+faker = Faker()
 
 BASE = 'https://jsonplaceholder.typicode.com'
 
@@ -45,6 +49,8 @@ def api_client(api_base_url):
 
     return _client
 
+
+
 logging.basicConfig(
     level=logging.INFO,  # DEBUG / INFO / WARNING / ERROR
     format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
@@ -55,3 +61,25 @@ logging.basicConfig(
 )
 
 logger = logging.getLogger()
+
+
+
+
+@pytest.fixture(scope='module')
+def created_post( api_client ):
+
+    payload = {
+        'title':  faker.text(50) ,
+        'body': faker.text(500),
+        'userId': faker.random_digit()
+    }
+
+    
+    
+
+    response = api_client("POST", "/posts", json=payload)
+    
+
+    print( response )
+
+    return response
